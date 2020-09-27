@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws java.io.IOException, ClassNotFoundException {
+    public static void main(String[] args) {
 
 
         Scanner sc = new Scanner(System.in);
@@ -30,43 +30,50 @@ public class Main {
             switch (opcion) {
                 case 1:
                     //escritura
-                    FileOutputStream fos = new FileOutputStream (fichero, true);
-                    ObjectOutputStream oos = new ObjectOutputStream (fos);
-
-                    //Variables introducir fichero
-                    int numDepartamento;
-                    String nombre;
-                    String localidad;
+                    try {
+                        FileOutputStream fos = new FileOutputStream (fichero, true);
+                        ObjectOutputStream oos = new ObjectOutputStream (fos);
 
 
+                        //Variables introducir fichero
+                        int numDepartamento;
+                        String nombre;
+                        String localidad;
 
-                    // para que no haya conflicto al introducir con el mismo escaner Strings
+
+                        // para que no haya conflicto al introducir con el mismo escaner Strings
 
 
-                    //Escritura en el fichero
-                    System.out.println("Introduzca el numero de departamento");
-                    numDepartamento=sc.nextInt();
+                        //Escritura en el fichero
+                        System.out.println("Introduzca el numero de departamento");
+                        numDepartamento = sc.nextInt();
 
-                    System.out.println("Nombre del departamento");
-                    nombre= sc2.nextLine();
+                        System.out.println("Nombre del departamento");
+                        nombre = sc2.nextLine();
 
-                    System.out.println("Localidad del departamento");
-                    localidad= sc2.nextLine();
-                    System.out.println("Grabo Ficheros");
+                        System.out.println("Localidad del departamento");
+                        localidad = sc2.nextLine();
+                        System.out.println("Grabo Ficheros");
 
-                    //Añado los nombres de los departamentos en un Array
-                    String nombres[]={nombre};
-                    String localidades[]={localidad};
-                    int numeroDepartamentos[]={numDepartamento};
+                        //Añado los nombres de los departamentos en un Array
+                        String nombres[]={nombre};
+                        String localidades[]={localidad};
+                        int numeroDepartamentos[]={numDepartamento};
 
-                    for (int i=0; i<nombres.length; i++) {
+                        for (int i = 0; i < nombres.length; i++) {
 
-                        departamento = new Departamento(nombres[i], localidades[i],numeroDepartamentos[i]);
-                        oos.writeObject(departamento);
-                        System.out.println("Grabados");
+                            departamento = new Departamento(nombres[i], localidades[i], numeroDepartamentos[i]);
+                            oos.writeObject(departamento);
+                            System.out.println("Grabados");
 
+                        }
+                        oos.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    oos.close();
+
 
                     break;
 
@@ -76,27 +83,35 @@ public class Main {
 
 
                 case 2:
-
-                    FileInputStream fis = new FileInputStream(fichero);
-                    ObjectInputStream ois = new ObjectInputStream(fis);
-                    Object aux = ois.readObject();
-                    System.out.println("Hola");
-                    int i=1;
                     try {
-                        System.out.println("Hola2");
+                    FileInputStream fis = new FileInputStream("Departamentos.dat");
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+
+                    int i=1;
                         while (true) { // lectura del fichero
-                            System.out.println("Hola22");
                             departamento = (Departamento) ois.readObject(); // leer un departamento
                             System.out.println(i + "=>");
                             i++;
-                            System.out.println("Nombre: " + departamento.getNombre() + "Localidad: " + departamento.getLocalidad() + "Numero de departamento: " + departamento.getNumDepartamento());
-                        }
-                    }catch(IOException io){
+                            System.out.println("Nombre: " + departamento.getNombre() + " Localidad: " + departamento.getLocalidad() + " Numero de departamento: " + departamento.getNumDepartamento());
 
-                    }finally {
-                        ois.close();
+
+                        }
+
                     }
+                    catch(FileNotFoundException ex){
+                        System.out.println("File not found");
+                    }
+                    catch(IOException ex){
+                        System.out.println("io Exception");
+                    }
+                    catch(ClassNotFoundException ex){
+                        System.out.println("Class not found");
+                    }
+
                 break;
+
+
+
 
 
                 case 4:
