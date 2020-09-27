@@ -116,6 +116,7 @@ public class Main {
 
                 case 4:
                     salir=true;
+
                     break;
                 default:
             }
