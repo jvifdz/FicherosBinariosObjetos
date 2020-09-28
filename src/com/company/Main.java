@@ -1,5 +1,6 @@
 package com.company;
 
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -109,8 +110,6 @@ public class Main {
                             System.out.println("Nombre: " + departamento.getNombre() + " Localidad: "
                                     + departamento.getLocalidad() + " Numero de departamento: "
                                     + departamento.getNumDepartamento());
-
-
                         }
 
                     }
