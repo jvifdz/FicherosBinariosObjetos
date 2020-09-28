@@ -54,19 +54,11 @@ public class Main {
                         System.out.println("Localidad del departamento");
                         localidad = sc2.nextLine();
                         System.out.println("Grabo Ficheros");
+                        //añadir datos al fichero
+                        departamento = new Departamento(nombre, localidad, numDepartamento);
+                        oos.writeObject(departamento);
+                        System.out.println("Grabados");
 
-                        //Añado los nombres de los departamentos en un Array
-                        String nombres[]={nombre};
-                        String localidades[]={localidad};
-                        int numeroDepartamentos[]={numDepartamento};
-
-                        for (int i = 0; i < nombres.length; i++) {
-
-                            departamento = new Departamento(nombres[i], localidades[i], numeroDepartamentos[i]);
-                            oos.writeObject(departamento);
-                            System.out.println("Grabados");
-
-                        }
                         oos.close();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
