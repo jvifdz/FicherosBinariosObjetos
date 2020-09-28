@@ -118,7 +118,7 @@ public class Main {
                         System.out.println("File not found");
                     }
                     catch(IOException ex){
-                        System.out.println("io Exception");
+                        //System.out.println("io Exception");
                     }
                     catch(ClassNotFoundException ex){
                         System.out.println("Class not found");
