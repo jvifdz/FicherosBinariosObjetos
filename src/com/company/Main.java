@@ -27,22 +27,26 @@ public class Main {
             File fichero = new File("Departamentos.dat");
             Departamento departamento;
 
-            switch (opcion) {
+            //declaracion variables escritura
+            FileOutputStream fos =null;
+            ObjectOutputStream oos =null;
+
+            //declaracion variables lectura
+            FileInputStream fis =null;
+            ObjectInputStream ois =null;
+
+                    switch (opcion) {
                 case 1:
-                    //escritura
+                    //flujos de escritura
                     try {
-                        FileOutputStream fos = new FileOutputStream (fichero, true);
-                        ObjectOutputStream oos = new ObjectOutputStream (fos);
+                        fos = new FileOutputStream (fichero, true);
+                        oos = new ObjectOutputStream (fos);
 
 
                         //Variables introducir fichero
                         int numDepartamento;
                         String nombre;
                         String localidad;
-
-
-                        // para que no haya conflicto al introducir con el mismo escaner Strings
-
 
                         //Escritura en el fichero
                         System.out.println("Introduzca el numero de departamento");
@@ -54,6 +58,8 @@ public class Main {
                         System.out.println("Localidad del departamento");
                         localidad = sc2.nextLine();
                         System.out.println("Grabo Ficheros");
+
+
                         //añadir datos al fichero
                         departamento = new Departamento(nombre, localidad, numDepartamento);
                         oos.writeObject(departamento);
@@ -64,6 +70,8 @@ public class Main {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }finally {
+
                     }
 
 
@@ -76,17 +84,21 @@ public class Main {
 
                 case 2:
                     try {
-                    FileInputStream fis = new FileInputStream("Departamentos.dat");
-                    ObjectInputStream ois = new ObjectInputStream(fis);
+                        //flujos de lectura
+                        fis = new FileInputStream("Departamentos.dat");
+                        ois = new ObjectInputStream(fis);
 
                     int i=1;
-                        while (true) { // lectura del fichero
+                        while (true) {
+                            // lectura del fichero
                             departamento = (Departamento) ois.readObject(); // leer un departamento
                             System.out.println(i + "=>");
                             i++;
-                            System.out.println("Nombre: " + departamento.getNombre() + " Localidad: " + departamento.getLocalidad() + " Numero de departamento: " + departamento.getNumDepartamento());
+                            System.out.println("Nombre: " + departamento.getNombre() + " Localidad: "
+                                    + departamento.getLocalidad() + " Numero de departamento: "
+                                    + departamento.getNumDepartamento());
 
-
+                            ois.close();
                         }
 
                     }
@@ -98,10 +110,18 @@ public class Main {
                     }
                     catch(ClassNotFoundException ex){
                         System.out.println("Class not found");
+                    }finally {
+
                     }
 
-                break;
+                    break;
 
+
+
+
+
+                case 3:
+                    break;
 
 
 
