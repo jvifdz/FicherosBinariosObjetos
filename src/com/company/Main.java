@@ -66,7 +66,6 @@ public class Main {
                         departamento = new Departamento(nombre, localidad, numDepartamento);
 
                         if(fichero.exists()){
-
                             moos=new MiObjectOutputStream(new FileOutputStream(fichero, true));
                             moos.writeObject(departamento);
                             moos.close();
