@@ -1,32 +1,23 @@
 package com.company;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 
-/**
- * Redefinición de la clase ObjectOuputStream para que no escriba una cabecera
- * al inicio del Stream.
- * @author Javier Abellán.
- *
- */
-public class MiObjectOutputStream extends ObjectOutputStream
-{
-    /** Constructor que recibe OutputStream */
+//Esta clase hereda sus propiedades de ObjectOutputStream
+public class MiObjectOutputStream extends ObjectOutputStream  {
+
+    //Sobrescribimos el método que crea la cabecera
+    protected void writeStreamHeader() throws IOException
+    {
+        // No hacer nada.
+    }
+
+    //Constructores
+
+    public MiObjectOutputStream () throws IOException{
+        super();
+    }
     public MiObjectOutputStream(OutputStream out) throws IOException
     {
         super(out);
     }
-
-    /** Constructor sin parámetros */
-    protected MiObjectOutputStream() throws IOException, SecurityException
-    {
-        super();
-    }
-
-    /** Redefinición del método de escribir la cabecera para que no haga nada. */
-    protected void writeStreamHeader() throws IOException
-    {
-    }
-
 }

@@ -3,38 +3,53 @@ package com.company;
 import java.io.Serializable;
 
 /**
- * Clase persona con varios datos sobre una persona y su mascota.
- * @author Javier Abellán.
+ * Clase Vehiculo
  *
+ * Contiene informacion de un vehiculo
+ *
+ * @author DiscoDuroderoer
+ * @version 1.0
  */
-public class Departamento implements Serializable
-{
-    public String nombre;
-    public String localidad;
-    public int numDepartamento;
+public class Departamento implements Serializable{
 
+    //Atributos
+
+    /**
+     * Nombre del departamento
+     */
+    private String Nombre;
+
+    /**
+     * Localidad del departamento
+     */
+    private String Localidad;
+
+
+    /**
+     * numero del departamento
+     */
+    private int numDepartamento;
 
     public Departamento(String nombre, String localidad, int numDepartamento) {
-        this.nombre = nombre;
-        this.localidad = localidad;
+        Nombre = nombre;
+        Localidad = localidad;
         this.numDepartamento = numDepartamento;
     }
 
-
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        Nombre = nombre;
     }
 
     public String getLocalidad() {
-        return localidad;
+        return Localidad;
     }
 
     public void setLocalidad(String localidad) {
-        this.localidad = localidad;
+        Localidad = localidad;
     }
 
     public int getNumDepartamento() {
