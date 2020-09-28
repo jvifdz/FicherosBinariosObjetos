@@ -145,17 +145,5 @@ public class Main {
                 default:
             }
         }
-
-
-
-
-
-
-
-
-
-        //lectura fichero
-
-
     }
 }
