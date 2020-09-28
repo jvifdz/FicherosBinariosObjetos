@@ -26,7 +26,7 @@ public class Main {
 
             System.out.println("1. Introducir departamento");
             System.out.println("2. Mostrar departamentos");
-            //System.out.println("3. Mostrar un departamento especifico");
+            System.out.println("3. Borrar un departamento especifico");
             System.out.println("4. Salir");
 
             System.out.println("Escribe una de las opciones");
@@ -130,8 +130,40 @@ public class Main {
 
 
 
-               // case 3:
-               //     break;
+                case 3:
+
+
+                    try
+                    {
+                        ficheroEntrada =new File("clientes.dat");
+                        ficheroSalida = new File("temporal.dat");
+                        flujoEntrada = new FileInputStream(ficheroEntrada);
+                        flujoSalida = new FileOutputStream (ficheroSalida);
+                        lector = new ObjectInputStream (flujoEntrada);
+                        escritor = new ObjectOutputStream(flujoSalida);
+                        Clientes cliente;
+                        //El bucle se rompe cuando el método readObject lance EOFException
+                        while(true)
+                        {
+                            cliente = (Clientes)lector.readObject();
+                            if(!borrarNif.equals(cliente.dni))
+                            {
+                                escritor.writeObject(cliente);
+                            }
+                        }
+                    }
+                    catch (FileNotFoundException fnfe)
+                    {
+                        System.out.println("Fichero no encontrado");
+                    }
+                    catch (IOException ioe)
+                    {
+                        //ioe.printStackTrace();
+                    }
+
+
+
+                    break;
 
 
 
