@@ -14,11 +14,18 @@ public class Main {
         boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
 
+        //variable escritura
+        MiObjectOutputStream moos = null;
+
+        //variable lectura
+        FileInputStream fis= null;
+        ObjectInputStream ois= null;
+
         while(!salir) {
 
             System.out.println("1. Introducir departamento");
             System.out.println("2. Mostrar departamentos");
-            System.out.println("3. Mostrar un departamento especifico");
+            //System.out.println("3. Mostrar un departamento especifico");
             System.out.println("4. Salir");
 
             System.out.println("Escribe una de las opciones");
@@ -28,19 +35,13 @@ public class Main {
             Departamento departamento;
 
             //declaracion variables escritura
-            FileOutputStream fos =null;
-            ObjectOutputStream oos =null;
 
-            //declaracion variables lectura
-            FileInputStream fis =null;
-            ObjectInputStream ois =null;
 
                     switch (opcion) {
                 case 1:
                     //flujos de escritura
                     try {
-                        fos = new FileOutputStream (fichero, true);
-                        oos = new ObjectOutputStream (fos);
+
 
 
                         //Variables introducir fichero
@@ -62,16 +63,25 @@ public class Main {
 
                         //añadir datos al fichero
                         departamento = new Departamento(nombre, localidad, numDepartamento);
-                        oos.writeObject(departamento);
+
+                        if(fichero.exists()){
+
+                            moos=new MiObjectOutputStream(new FileOutputStream(fichero, true));
+                            moos.writeObject(departamento);
+                            moos.close();
+                        }else{
+                            ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream(fichero));
+                            oos.writeObject(departamento);
+                            oos.close();
+                        }
+
                         System.out.println("Grabados");
 
-                        oos.close();
+
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }finally {
-
                     }
 
 
@@ -85,6 +95,8 @@ public class Main {
                 case 2:
                     try {
                         //flujos de lectura
+
+
                         fis = new FileInputStream("Departamentos.dat");
                         ois = new ObjectInputStream(fis);
 
@@ -98,7 +110,7 @@ public class Main {
                                     + departamento.getLocalidad() + " Numero de departamento: "
                                     + departamento.getNumDepartamento());
 
-                            ois.close();
+
                         }
 
                     }
@@ -120,8 +132,8 @@ public class Main {
 
 
 
-                case 3:
-                    break;
+               // case 3:
+               //     break;
 
 
 
