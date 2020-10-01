@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * Contiene informacion de un vehiculo
  *
- * @author DiscoDuroderoer
+ * @author JviFdz
  * @version 1.0
  */
 public class Departamento implements Serializable{
